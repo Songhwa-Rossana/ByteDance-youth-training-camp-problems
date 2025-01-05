@@ -1,10 +1,14 @@
 def solution(n: int, s: list, x: list) -> list:
-    # PLEASE DO NOT MODIFY THE FUNCTION SIGNATURE
-    # write code here
+    assert n == len(s) == len(x)
+    start = {}
+    cnt = {}
+    for i in range(n):
+        if s[i] not in start.keys():
+            start[s[i]] = i
+        cnt[s[i]] = cnt.get(s[i], 0) + x[i]
+    a = sorted(cnt.keys(), key=lambda s: (-cnt[s], start[s]))
+    return a
 
-    str = list(zip(s, x, range(n)))
-    str.sort(key = lambda p:(-p[1], p[2]))
-    return [p[0] for p in str]
 
 if __name__ == '__main__':
     print(solution(4, ["a", "b", "c", "d"], [1, 2, 2, 1]) == ['b', 'c', 'a', 'd'])
